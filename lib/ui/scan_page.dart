@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant_app/constants.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
@@ -10,9 +11,85 @@ class ScanPage extends StatefulWidget {
 class _ScanPageState extends State<ScanPage> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Scan Page'),
+      body: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 50,
+              left: 20,
+              right: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Constants.primaryColor.withOpacity(.15),
+                      ),
+                      child: Icon(Icons.close, color: Constants.primaryColor),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      debugPrint('favorite');
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Constants.primaryColor.withOpacity(.15),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.share, color: Constants.primaryColor),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              child: Container(
+                height: size.height * .9,
+                padding: const EdgeInsets.all(20),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/code-scan.png',
+                        height: 100,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Tap to Scan',
+                        style: TextStyle(
+                            color: Constants.primaryColor.withOpacity(.80),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -17,6 +17,14 @@ class _DetailPageState extends State<DetailPage> {
     Size size = MediaQuery.of(context).size;
     List<Plant> plantList = Plant.plantList;
 
+    bool toggleIsFavorited(bool isFavorited) {
+      return !isFavorited;
+    }
+
+    bool toggleIsSelected(bool isSelected) {
+      return !isSelected;
+    }
+
     return Scaffold(
       floatingActionButton: SizedBox(
         width: size.width * .9,
@@ -35,9 +43,20 @@ class _DetailPageState extends State<DetailPage> {
                     color: Constants.primaryColor.withOpacity(.3),
                   ),
                 ]),
-            child: const Icon(
-              Icons.shopping_cart,
-              color: Colors.white,
+            child: IconButton(
+              onPressed: () {
+                setState(() {
+                  bool isSelected =
+                      toggleIsSelected(plantList[widget.plantId].isSelected);
+                  plantList[widget.plantId].isSelected = isSelected;
+                });
+              },
+              icon: Icon(
+                Icons.shopping_cart,
+                color: plantList[widget.plantId].isSelected
+                    ? Colors.white
+                    : Constants.primaryColor,
+              ),
             ),
           ),
           const SizedBox(
@@ -46,7 +65,9 @@ class _DetailPageState extends State<DetailPage> {
           Expanded(
             child: Container(
                 decoration: BoxDecoration(
-                  color: Constants.primaryColor,
+                  color: plantList[widget.plantId].isSelected
+                      ? Constants.primaryColor.withOpacity(.5)
+                      : Constants.primaryColor,
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
@@ -96,11 +117,20 @@ class _DetailPageState extends State<DetailPage> {
                       borderRadius: BorderRadius.circular(25),
                       color: Constants.primaryColor.withOpacity(.15),
                     ),
-                    child: Icon(
-                        plantList[widget.plantId].isFavorated
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: Constants.primaryColor),
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          bool isFavorited = toggleIsFavorited(
+                              plantList[widget.plantId].isFavorated);
+                          plantList[widget.plantId].isFavorated = isFavorited;
+                        });
+                      },
+                      icon: Icon(
+                          plantList[widget.plantId].isFavorated
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Constants.primaryColor),
+                    ),
                   ),
                 ),
               ],
