@@ -42,14 +42,46 @@ class _CartPageState extends State<CartPage> {
           : Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 30),
               height: size.height * .5,
-              child: ListView.builder(
-                itemCount: widget.addedToCartPlants.length,
-                scrollDirection: Axis.vertical,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  return PlantWidget(
-                      index: index, plantList: widget.addedToCartPlants);
-                },
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: widget.addedToCartPlants.length,
+                      scrollDirection: Axis.vertical,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return PlantWidget(
+                            index: index, plantList: widget.addedToCartPlants);
+                      },
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      const Divider(
+                        thickness: 1.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Totals',
+                            style: TextStyle(
+                                fontSize: 23, fontWeight: FontWeight.w300),
+                          ),
+                          Text(
+                            r'$110',
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Constants.primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
     );
