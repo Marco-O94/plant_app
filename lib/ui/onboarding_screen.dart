@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
 import 'package:plant_app/ui/root_page.dart';
+import 'package:plant_app/ui/signin_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -28,7 +29,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RootPage()));
+                              builder: (context) => const SigninPage()));
                     }, // to login screen
                     child: const Text(
                       'Skip',
@@ -91,7 +92,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const RootPage()));
+                                            const SigninPage()));
                               }
                             })
                           },
